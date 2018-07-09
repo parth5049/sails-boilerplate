@@ -25,3 +25,21 @@ This app was originally generated on Mon Jul 09 2018 16:10:30 GMT+0530 (IST) usi
 Note:  Generators are usually run using the globally-installed `sails` CLI (command-line interface).  This CLI version is _environment-specific_ rather than app-specific, thus over time, as a project's dependencies are upgraded or the project is worked on by different developers on different computers using different versions of Node.js, the Sails dependency in its package.json file may differ from the globally-installed Sails CLI release it was originally generated with.  (Be sure to always check out the relevant [upgrading guides](https://sailsjs.com/upgrading) before upgrading the version of Sails used by your app.  If you're stuck, [get help here](https://sailsjs.com/support).)
 -->
 
+### Models
+
+This app contains following models:
+
+Users - Contains basic user related attributes and validators
+
+### Controllers
+
+This app contains following controllers:
+
+UsersController - User related methods and CRUD
+AuthController - User Authentication using passport.js
+MailsController - Sending Mails using Mail helper
+S3Controller - File upload to Amazon S3
+
+### Helpers
+
+mail-sender.js - Boilerplate for sending emails using SMTP and nodemailer

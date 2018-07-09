@@ -44,6 +44,19 @@ module.exports.routes = {
   //  ╠═╣╠═╝║  ║╣ ║║║ ║║╠═╝║ ║║║║║ ║ ╚═╗
   //  ╩ ╩╩  ╩  ╚═╝╝╚╝═╩╝╩  ╚═╝╩╝╚╝ ╩ ╚═╝
 
+  // User Endpoints
+  'POST /api/registerUserWithEmail': 'UsersController.registerUserWithEmail',
+
+  // Authentication Endpoints
+  'POST /api/login': 'AuthController.login',
+  '/api/logout': 'AuthController.logout',
+
+  // Helper/Utilities Endpoints -- These Endpoints will never be used directly in the project. This is just for testing the
+  // helper functions
+  'GET /api/sendTestMail': 'MailsController.sendTestMail',
+  
+  
+  
 
 
   //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗
