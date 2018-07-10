@@ -1,45 +1,49 @@
-# sails-boilerplate
+# SailsJS Boilerplate Application
 
-a [Sails v1](https://sailsjs.com) application
+This is a boilerplate application using SailsJS and NodeJS with basic features and base to start your project. The project contains following features and the development work is still ongoing. 
 
-
-### Links
-
-+ [Get started](https://sailsjs.com/get-started)
-+ [Sails framework documentation](https://sailsjs.com/documentation)
-+ [Version notes / upgrading](https://sailsjs.com/documentation/upgrading)
-+ [Deployment tips](https://sailsjs.com/documentation/concepts/deployment)
-+ [Community support options](https://sailsjs.com/support)
-+ [Professional / enterprise options](https://sailsjs.com/enterprise)
+### Version Info
+- Version 0.0.1
+- NodeJS 8.11.3
+- SailsJS 1.0.2
+- For further details, kindly refer to package.json file
 
 
-### Version info
+This boilerplate application contains following features:
 
-This app was originally generated on Mon Jul 09 2018 16:10:30 GMT+0530 (IST) using Sails v1.0.2.
-
-<!-- Internally, Sails used [`sails-generate@1.15.28`](https://github.com/balderdashy/sails-generate/tree/v1.15.28/lib/core-generators/new). -->
-
-
-
-<!--
-Note:  Generators are usually run using the globally-installed `sails` CLI (command-line interface).  This CLI version is _environment-specific_ rather than app-specific, thus over time, as a project's dependencies are upgraded or the project is worked on by different developers on different computers using different versions of Node.js, the Sails dependency in its package.json file may differ from the globally-installed Sails CLI release it was originally generated with.  (Be sure to always check out the relevant [upgrading guides](https://sailsjs.com/upgrading) before upgrading the version of Sails used by your app.  If you're stuck, [get help here](https://sailsjs.com/support).)
--->
-
-### Models
-
-This app contains following models:
+## Models
 
 Users - Contains basic user related attributes and validators
 
-### Controllers
+## Controllers
 
-This app contains following controllers:
-
-UsersController - User related methods and CRUD
-AuthController - User Authentication using passport.js
-MailsController - Sending Mails using Mail helper
+UsersController - User related methods and CRUD 
+AuthController - User Authentication using passport.js 
+MailsController - Sending Mails using Mail helper 
 S3Controller - File upload to Amazon S3
 
-### Helpers
+## Helpers
 
 mail-sender.js - Boilerplate for sending emails using SMTP and nodemailer
+
+# Installation Steps
+
+### Prerequisites
+
+1. Make sure NodeJS (version >=8.11.3 recommended) and NPM are installed
+2. This app does not use any database but instead uses sails-disk, an embedded database provided by sails for development purpose only. Feel free to change the database config as per your requirements
+3. Excecute following commands 
+```sh
+$ npm install -g sails
+$ git clone <this repo>
+$ cd <repo>
+$ npm install
+$ npm installl -g nodemon
+$ sails lift
+```
+
+
+# Contributors
+- [Zignuts Technolab](www.zignuts.com) Development Team
+
+For any inquiries, please feel free to reach me or write an email to hello(at)zignuts(dot)com. 
