@@ -44,6 +44,6 @@ $ sails lift
 
 
 # Contributors
-- [Zignuts Technolab](www.zignuts.com) Development Team
+- [Zignuts Technolab](http://www.zignuts.com) Development Team
 
 For any inquiries, please feel free to reach me or write an email to hello(at)zignuts(dot)com. 
