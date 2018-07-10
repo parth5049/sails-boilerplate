@@ -82,13 +82,15 @@ module.exports = {
 
   },
 
+  // This is because password field is not sent in any response where user document/record is required
   customToJSON: function() {
     return _.omit(this, ['password'])
   },
 
+  // This will be called each time before creating a new user
   beforeCreate: function(values, next) {
+    
     // Hash password
-
     bcrypt.genSalt(5, function(err, salt) {
         if (err) return next(err);
     
@@ -103,23 +105,13 @@ module.exports = {
   },
 
 
-  validateOnCreate: async function(values){
-
-    var errors = this.validateData(values)
-    console.log(errors);
-
-    if(!errors){
-      Users.isEmailExists(values.email)
-        .then(function(error1){
-                console.log('isEmailExists called');
-                console.log(error1);
-                if(error1)
-                  return error1;
-        });
-    }/*else
-      return errors;*/
-  },
-
+  /**
+   * @method validateData
+   * @param values - contains email, password and name
+   * @desc This method validates mandatory fields such as email, password and name. 
+   * This method is usually called before creating a new user. 
+   * @returns JSON Object with code and msg. It returns nothing if validation passes
+   */
   validateData: function(values){
     console.log('Users.validateData called');
     
@@ -134,7 +126,13 @@ module.exports = {
       return {
         code: '01',
         msg: 'Password is required'
-      } 
+      }
+    
+    if(values.name === "")
+      return {
+        code: '01',
+        msg: 'Name is required'
+      }  
 
     // Checking for email format  
     if(!this.validateEmail(values.email))  
@@ -143,6 +141,13 @@ module.exports = {
         msg: 'Provided email is invalid. Please provide correct email.'
       }
   },
+
+  /**
+   * @method isEmailExists
+   * @desc Checked whether provided email already exists in the database
+   * @param values - containts the email address
+   * @returns JSON Object with code and msg. It returns nothing if validation passes
+   */
 
   isEmailExists: async function(values){
     console.log('Users.isEmailExists called');
@@ -166,10 +171,16 @@ module.exports = {
     return result;
   },
 
-  isPhoneExists: async function(vCountryCode, vPhone){
+  /**
+   * @method isPhoneExists
+   * @desc Checked whether provided phone number already exists in the database
+   * @param vPhone - containts the phone number
+   * @returns JSON Object with code and msg. It returns nothing if validation passes
+   */
+  isPhoneExists: async function(vPhone){
     console.log('Users.isPhoneExists called');
     var result;
-    await Users.findOne({ country_code : vCountryCode, phone: vPhone }).then(function(user){
+    await Users.findOne({ phone: vPhone }).then(function(user){
       
       if(user){
         result = {
@@ -188,6 +199,11 @@ module.exports = {
     return result;
   },
 
+  /**
+   * @method validateEmail
+   * @desc Validates given email using regex match
+   * @returns boolean 
+   */
   validateEmail: function(inputText){
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if(inputText.match(mailformat))
@@ -196,6 +212,12 @@ module.exports = {
       return false;
   },
 
+  /**
+   * @method createUser
+   * @desc Creates a new user and inserts into database. 
+   * Developers need to validate the input using the methods above before actually calling this method
+   * @param Users Object
+   */
   createUser: async function(values){
     var user = await Users.create(values).fetch();
     return user;

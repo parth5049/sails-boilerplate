@@ -12,7 +12,7 @@ module.exports = {
      * @desc This function validates data and creates a new User. 
      * The email has to be unique and the form should have valid data. 
      * The user will be created with status=1 (Pending Email Verification)
-     * @param Request name, email, password and createdBy
+     * @param Request name-M, email-M, password-M, country_code, phone and createdBy (M-Mandatory)
      * @param Response
      * @returns Response JSON
      */
@@ -41,6 +41,8 @@ module.exports = {
             userdata = {
                 name: req.body.name,
                 email : req.body.email,
+                country_code: req.body.country_code,
+                phone: req.body.phone,
                 password : req.body.password,
                 createdBy : req.body.createdBy,
                 status : 1
@@ -63,7 +65,7 @@ module.exports = {
      * @desc This function validates data and creates a new User. 
      * The phone number has to be unique and the form should have valid data. 
      * The user will be created with status=1 (Pending Phone Number Verification)
-     * @param Request name, country_code, phone, email, password and createdBy
+     * @param Request name-M, email, password-M, country_code-M, phone-M and createdBy where M=Mandatory
      * @param Response
      * @returns Response JSON
      */
@@ -80,7 +82,7 @@ module.exports = {
                 });
 
         // Validating if phone number already exists
-        Users.isPhoneExists(req.body.country_code, req.body.phone).then(function(result){
+        Users.isPhoneExists(req.body.phone).then(function(result){
             if(result)
                 return res.json({
                     status: 400,

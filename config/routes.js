@@ -46,9 +46,12 @@ module.exports.routes = {
 
   // User Endpoints
   'POST /api/registerUserWithEmail': 'UsersController.registerUserWithEmail',
+  'POST /api/registerUserWithPhone': 'UsersController.registerUserWithPhone',
+  
 
   // Authentication Endpoints
   'POST /api/login': 'AuthController.login',
+  'POST /api/loginWithPhone': 'AuthController.loginWithPhone',
   '/api/logout': 'AuthController.logout',
 
   // Helper/Utilities Endpoints -- These Endpoints will never be used directly in the project. This is just for testing the

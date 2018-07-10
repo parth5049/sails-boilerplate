@@ -6,6 +6,16 @@
  */
 
 module.exports = {
+
+  /**
+     * @method sendTestMail
+     * @desc This function sends a test mail to given address by using the mail-sender helper 
+     * and configured SMTP settings in .env file. Developers can refer this function for the usage of helper
+     * and handling the exceptions
+     * @param Request
+     * @param Response
+     * @returns Response JSON
+     */  
   sendTestMail:async function(req, res){
 
     console.log("sendTestMail called");
