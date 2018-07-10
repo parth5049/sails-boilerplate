@@ -166,6 +166,28 @@ module.exports = {
     return result;
   },
 
+  isPhoneExists: async function(vCountryCode, vPhone){
+    console.log('Users.isPhoneExists called');
+    var result;
+    await Users.findOne({ country_code : vCountryCode, phone: vPhone }).then(function(user){
+      
+      if(user){
+        result = {
+          code: '03',
+          msg: 'The given phone number already exists. Please enter another phone number.' 
+        };
+      }  
+    }).catch(function (err){
+      console.log('Error: '+err);
+      result = {
+          code: '99',
+          msg: 'Some error occurred. Please try again later.' 
+        };
+    });
+
+    return result;
+  },
+
   validateEmail: function(inputText){
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if(inputText.match(mailformat))

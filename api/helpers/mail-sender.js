@@ -38,7 +38,14 @@ module.exports = {
 
 
   fn: async function (inputs, exits) {
+    // Initializing nodemailer
+    
     nodemailer = require("nodemailer");
+
+    // Creating transport using the credentials specified in the .env file
+    // TODO need to find ways to make this transport globally accessible to avoid initializing the transport each time
+    // and to improve mail send performance
+    
     var smtpTransport = nodemailer.createTransport( {
         host:  process.env.smtp_host,
         port:  process.env.smtp_port,
@@ -47,20 +54,27 @@ module.exports = {
           pass:	 process.env.smtp_password,
         }
     }); 
-    //var smtpTransport = this.createTransports();
+    
+    // Setting up mail options for sending mail. 
     var mailOptions = {
         to: inputs.mailTo,
         from:   process.env.smtp_sender_email,
         subject: inputs.mailSubject,
         html: inputs.mailBody
     };
-        smtpTransport.sendMail(mailOptions, (err) => {
-            if(err){
-              return exits.mailError(err);
-            } 
-            // All done.
-            return exits.success(true);
-        });
+
+    // Sends email asynchronously and capturing the response
+
+    smtpTransport.sendMail(mailOptions, (err) => {
+        
+        // Handle the error if any and return the mailError exit route
+        if(err){
+          return exits.mailError(err);
+        } 
+
+        // Mail has been sent successfully.
+        return exits.success(true);
+    });
   },
 
 
